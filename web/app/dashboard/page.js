@@ -39,7 +39,7 @@ export default function DashboardPage() {
   const fetchNotes = async (token) => {
     setIsLoading(true);
     try {
-      const res = await fetch('http://localhost:3001/api/notes', {
+      const res = await fetch('/api/notes', {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
@@ -60,7 +60,7 @@ export default function DashboardPage() {
     setIsCreating(true);
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch('http://localhost:3001/api/notes', {
+      const res = await fetch('/api/notes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ export default function DashboardPage() {
     if (!confirm('Are you sure you want to delete this note?')) return;
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`http://localhost:3001/api/notes/${noteId}`, {
+      const res = await fetch(`/api/notes/${noteId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -105,7 +105,7 @@ export default function DashboardPage() {
   const handleUpgrade = async () => {
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`http://localhost:3001/api/tenants/${user.tenantSlug}/upgrade`, {
+      const res = await fetch(`/api/tenants/${user.tenantSlug}/upgrade`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       });
