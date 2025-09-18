@@ -1,113 +1,86 @@
-# MultiTenant_Saas_Notes
+# Multi-Tenant SaaS Notes App
 
-A multi-tenant SaaS Notes application. This project demonstrates how to build a note-taking application that supports multiple tenants, separating their data and providing an isolated experience.
+[![Vercel Deployment](https://img.shields.io/badge/deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Tech Stack: Next.js](https://img.shields.io/badge/Frontend-Next.js-lightgrey?style=for-the-badge&logo=nextdotjs)](https://nextjs.org/)
+[![Tech Stack: Node.js](https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=nodedotjs)](https://nodejs.org/)
+[![Database: PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue?style=for-the-badge&logo=postgresql)](https://www.postgresql.org/)
 
----
+A robust, multi-tenant SaaS Notes application built with Next.js and Node.js. This project serves as a powerful boilerplate for building applications that require data isolation between different users or organizations, providing each tenant with a completely separate and secure experience.
 
-## Features
 
-- Multi-tenant support (each tenant has its own set of notes)  
-- REST API backend  
-- Web frontend for users to login, create, view, edit, delete notes  
-- Tenant isolation: data is scoped per tenant  
-- Authentication & user management (assuming implemented)  
-- Deployment ready (Vercel config included)  
 
 ---
 
-## Architecture
+## ✨ Features
 
-This project is divided primarily into two components:
-
-1. **API** (backend) — handles authentication, note CRUD operations, tenant management  
-2. **Web** (frontend) — UI for users to interact with the notes application  
-
-They communicate via REST endpoints.  
-
----
-
-## Tech Stack
-
-| Component       | Technology / Library            |
-|------------------|----------------------------------|
-| Backend          | Node.js  |
-| Frontend         | Next.js  |
-| Database         | PostgreSQL, MySQL        |
-| Deployment       | Vercel  |
-| Others           | Environment variables etc.         |
+-   **Multi-Tenancy:** Secure data isolation ensures that each tenant (user or organization) can only access their own notes.
+-   **Modern Frontend:** A responsive and interactive user interface built with **Next.js**.
+-   **Robust Backend API:** A scalable REST API built with **Node.js** and **Express.js** to handle all business logic.
+-   **Database Integration:** Uses **Prisma ORM** for elegant and type-safe database interactions with PostgreSQL.
+-   **JWT Authentication:** Secure user authentication and session management using JSON Web Tokens.
+-   **CRUD Functionality:** Full create, read, update, and delete operations for notes.
+-   **Deployment-Ready:** Pre-configured for seamless deployment to **Vercel**.
 
 ---
 
-## Getting Started
+## 🛠️ Tech Stack
 
-Follow these steps to run the project locally.
+| Component      | Technology / Library                                       |
+| -------------- | ---------------------------------------------------------- |
+| **Frontend** | Next.js, React, Tailwind CSS                               |
+| **Backend** | Node.js, Express.js                                        |
+| **Database** | PostgreSQL, Prisma (ORM)                                   |
+| **Deployment** | Vercel                                                     |
+| **Auth** | JSON Web Tokens (JWT), bcrypt                              |
+| **Tooling** | ESLint, Prettier, `concurrently` (for local development)   |
 
-### Prerequisites
+---
 
-- Node.js installed (version X or higher)  
-- npm or yarn package manager  
-- Database setup (e.g. MongoDB / PostgreSQL)  
-- Environment variables (see *Configuration* section)  
+## 🏛️ Architecture
 
-### Setup
+This project is a **monorepo** containing two primary packages:
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to set up and run the project locally.
+
+### 1. Prerequisites
+
+-   [Node.js](https://nodejs.org/) (v18 or higher)
+-   [npm](https://www.npmjs.com/) (v9 or higher) or yarn
+-   A running PostgreSQL database instance.
+
+### 2. Setup
 
 ```bash
-# clone the repository
-git clone https://github.com/Rashi-Dwivedi1812/MultiTenant_Saas_Notes.git
+# Clone the repository
+git clone [https://github.com/Rashi-Dwivedi1812/MultiTenant_Saas_Notes.git](https://github.com/Rashi-Dwivedi1812/MultiTenant_Saas_Notes.git)
 cd MultiTenant_Saas_Notes
 
-# install dependencies for backend
-cd api
+# Install all dependencies for both 'api' and 'web' workspaces from the root
 npm install
 
-# install dependencies for frontend
-cd ../web
-npm install
+1.  **`api/`** (Backend): An Express.js server responsible for handling business logic, database operations, and authentication.
+2.  **`web/`** (Frontend): A Next.js application that provides the user interface and communicates with the backend via REST API calls.
 
-# run backend
-cd api
-npm run dev   # or the script for starting the server
+# .env.example
 
-# run frontend
-cd ../web
-npm run dev   # or as per your setup (Next.js / React etc.)
+# Database Configuration
+# Get this from your PostgreSQL provider (e.g., Neon, Supabase, or local instance)
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?sslmode=require"
 
+# JWT Authentication
+JWT_SECRET="YOUR_SUPER_SECRET_KEY_FOR_JWT"
+
+# Server Configuration
+PORT=3001
+
+# From the root directory of the project
+npx prisma migrate dev --schema=./api/prisma/schema.prisma
+
+# From the root directory
+npm run dev
 ```
-
-## Folder Structure
-MultiTenant_Saas_Notes/
-├── api/               # backend code
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── middleware/
-│   └── config/
-├── web/               # frontend code
-│   ├── pages/ or components/
-│   ├── public/
-│   ├── styles/
-│   └── utils/
-├── .gitignore
-├── package.json
-├── vercel.json         # for deployment settings
-└── README.md
-
-
-## Configuration
-| Name                           | Description                                           |
-| ------------------------------ | ----------------------------------------------------- |
-| `DATABASE_URL`                 | Connection string to your database                    |
-| `JWT_SECRET`                   | Secret key for signing JSON Web Tokens                |
-| `PORT`                         | Port for backend server                               |
-| `NEXT_PUBLIC_API_URL`          | URL where backend API is hosted, for frontend to call |
-| `VERCEL_URL` (if using Vercel) | Deployment URL                                        |
-
-
-## Deployment
-The project includes a vercel.json, which helps with deploying via Vercel.
-
-Steps:
-1. Push your code to a Git provider (GitHub).
-2. Connect the project with Vercel.
-3. Set up environment variables in Vercel’s dashboard.
-4. Deploy — Vercel will build frontend & backend (if configured) automatically.
