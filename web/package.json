@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "prisma generate && next build --turbopack",
     "start": "next start",
     "lint": "eslint"
+  },
+  "prisma": {
+    "schema": "../api/prisma/schema.prisma"
   },
   "dependencies": {
     "jwt-decode": "^4.0.0",
